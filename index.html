@@ -449,14 +449,14 @@
         coins.forEach((coin, index) => {
             const card = `
                 <tr class="bg-gray-700 bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-30  cursor-pointer" onclick="location.href='${coin.page}'">
-                    <td class="hover:bg-gray-900 pl-4 py-3 mt-0.5 border border-gray-800 flex items-center gap-3">
+                    <td class="hover:bg-gray-900 pl-4 py-3 mt-0.5  flex items-center gap-3">
                         <img src="${coin.img}" alt="${coin.name}" class="h-5 w-5">
                         <span class="text-sm font-semibold ">${coin.name}</span>
                     </td>
-                    <td class=" crypto-price px-4 py-3 border border-gray-800 text-center font-semibold" id="price-${index}" >
+                    <td class=" crypto-price px-4 py-3  text-center font-semibold" id="price-${index}" >
                       ${coin.price}
                     </td>
-                    <td class="px-4 py-3 font-semibold border border-gray-800 text-center " id="change-${index}" style="color: ${coin.change >= 0 ? 'green' : 'red'};">
+                    <td class="px-4 py-3 font-semibold  text-center " id="change-${index}" style="color: ${coin.change >= 0 ? 'green' : 'red'};">
                         ${coin.change.toFixed(2)}%
                     </td>
                      
