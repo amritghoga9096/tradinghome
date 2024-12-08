@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Interface</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+         <link rel="stylesheet" href="common.css">
+    <style>
+
+        /* Fixed bottom navigation styling */
+        .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; }
+        
+          #language-popup.hidden { display: none; }
+
+       
+  .tooltip {
+    position: relative;
+    display: inline-block;
+  }
+
+  .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+    bottom: 150%; /* Adjust as needed */
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+  }
+   
+  /* Custom styles for scrolling */
+#language-popup .max-h-60 {
+  scrollbar-width: thin;
+  scrollbar-color: #6b7280 #1f2937;
+}
+#language-popup .max-h-60::-webkit-scrollbar {
+  width: 5px;
+}
+#language-popup .max-h-60::-webkit-scrollbar-thumb {
+  background-color: #6b7280;
+  border-radius: 10px;
+}
+#language-popup .max-h-60::-webkit-scrollbar-track {
+  background: #1f2937;
+}
+
+          
+    </style>
+</head>
+<body class="bg-black text-gray-300" id="content">
+
+    <!-- Header and Carousel -->
+    <header class="p-4 shadow">
+        <div class="flex justify-between items-center">
+            <img src="https://img.icons8.com/nolan/512/3d-viewer.png" alt="Logo" class="h-8">
+            <div class="carousel w-full mx-4 overflow-hidden">
+
+            </div>
+            <button id="language-logo" class="text-xs border p-1 rounded">EN</button>
+        </div>
+    </header>
+    
+ <!-- Popup for Language Selection -->
+<div id="language-popup" class="hidden fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center" style="z-index: 99999">
+  <div class="relative bg-gray-700 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-30 p-4 rounded shadow-lg w-80 text-center">
+    <button id="popup-close" class="absolute top-2 right-2 bg-gradient-to-b to-purple-800 from-blue-800 text-white w-6 h-6 rounded-full">✕</button>
+    <h2 class="text-lg font-semibold mb-4">Select Language</h2>
+    <div class="max-h-60 overflow-y-auto">
+      <ul id="language-list" class="space-y-2"></ul>
+    </div>
+  </div>
+</div>
+
+  
+  <!-- image cursoule -->
+  <div
+  id="carouselExampleSlidesOnly"
+  class="relative w-full"
+  data-twe-carousel-init
+  data-twe-ride="carousel">
+  <!-- Carousel items -->
+  <div
+    class="relative w-full overflow-hidden after:clear-both after:block after:content-['']">
+    <!-- First item -->
+    <div
+      class="relative float-left w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none active"
+      data-twe-carousel-item>
+      <img
+        src="https://mdbcdn.b-cdn.net/img/new/slides/041.webp"
+        class="block w-full"
+        />
+    </div>
+    <!-- Second item -->
+    <div
+      class="relative float-left w-full hidden transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none"
+      data-twe-carousel-item>
+      <img
+        src="https://mdbcdn.b-cdn.net/img/new/slides/042.webp"
+        class="block w-full"
+         />
+    </div>
+    <!-- Third item -->
+    <div
+      class="relative float-left w-full hidden transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none"
+      data-twe-carousel-item>
+      <img
+        src="https://mdbcdn.b-cdn.net/img/new/slides/043.webp"
+        class="block w-full"
+        />
+    </div>
+  </div>
+</div>
+
+
+    <!-- Action Buttons -->
+    <section class="flex justify-between text-center p-4 bg-gray-700 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-30 shadow-lg shadow-white ">
+        <div class="text-sm flex flex-col items-center">
+            <img width="30" height="30" src="https://img.icons8.com/nolan/64/request-money.png" alt="bonds"/>
+            <p class="text-xs" data-en="Recharge" data-hi="जमा">Recharge</p>
+        </div>
+        <div class="text-sm flex flex-col items-center">
+<img width="30" height="30" src="https://img.icons8.com/nolan/64/insert-card.png" alt="bank-card-dollar"/>
+            <p class="text-xs" data-en="Withdraw" data-hi="निकालना">Withdraw</p>
+        </div>
+        <div class="text-sm flex flex-col items-center">
+<img width="30" height="30" src="https://img.icons8.com/nolan/512/downloading-updates.png" />
+            <p class="text-xs"data-en="App" data-hi="शेयर">App</p>
+        </div>
+        <div class="text-sm flex flex-col items-center">
+<img width="30" height="30" src="https://img.icons8.com/nolan/512/telegram-app.png" />
+            <p class="text-xs">Service</p>
+        </div>
+        <div class="text-sm flex flex-col items-center">
+<img width="30" height="35" src="https://img.icons8.com/nolan/64/high-connection.png" />
+            <p class="text-xs">Signal</p>
+        </div>
+    </section>
+    
+<div class="flex justify-between text-center px-4 py-2   shadow-lg shadow-white mt-2">
+            <!-- Coin containers for BTC, ETH, and BCH -->
+            <div id="btc-container" class="text-center flex flex-col">
+              <span class="text-sm font-semibold">BTC/USDT</span>
+              <span id="btc-price" class="text-green-600 font-bold text-sm">...</span>
+              <span id="btc-change" class="text-green-600 font-semibold text-sm">...</span>
+            </div>
+          
+            <div id="eth-container" class="text-center flex flex-col">
+              <span class="text-sm font-semibold">ETH/USDT</span>
+              <span id="eth-price" class="text-green-600 font-bold text-sm " >...</span>
+              <span id="eth-change" class="text-green-600 font-semibold text-sm">...</span>
+            </div>
+          
+            <div id="bch-container" class="text-center flex flex-col">
+              <span class="text-sm font-semibold">BCH/USDT</span>
+              <span id="bch-price" class="text-green-600 font-bold text-sm">...</span>
+              <span id="bch-change" class="text-green-600 font-semibold text-sm">...</span>
+            </div>
+          </div>
+
+    <!-- Market Data Table -->
+    <section class="mt-4 ">
+      <div class="overflow-x-auto">
+        <table class="w-full table-auto border-collapse border border-gray-900 ">
+            <thead class=" bg-gray-700 bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-30  text-white ">
+                <tr>
+                    <th class="px-4 py-2 border border-gray-800">Market</th>
+                    <th class="px-4 py-2 border border-gray-800">Price</th>
+                    <th class="px-4 py-2 border border-gray-800">Change</th>
+                </tr>
+            </thead>
+            <tbody id="crypto-table-body" class="text-gray-300">
+                <!-- Rows will be dynamically added here -->
+            </tbody>
+        </table>
+    </div>
+    
+    </section>
+    
+    <div style="height: 150px"></div>
+
+    <!-- Fixed Bottom Navigation -->
+<nav class="fixed bottom-0 left-0 right-0 bg-black bg-opacity-30 backdrop-filter backdrop-blur-lg shadow-lg text-center flex justify-between px-4 py-2 text-xs border-t border-blue-700">
+  <div class="flex flex-col items-center">
+      <img width="30" height="30" src="https://img.icons8.com/nolan/512/home-page.png" alt="Home" />
+      <p class="mt-1">Home</p>
+  </div>
+  <div class="flex flex-col items-center">
+      <img width="30" height="30" src="https://img.icons8.com/nolan/512/coin-wallet.png" alt="Wallet" />
+      <p class="mt-1">Wallet</p>
+  </div>
+  <div class="flex flex-col items-center">
+      <img width="30" height="30" src="https://img.icons8.com/nolan/64/share-2.png" alt="Invite" />
+      <p class="mt-1">Invite</p>
+  </div>
+  <div class="flex flex-col items-center">
+      <img width="30" height="30" src="https://img.icons8.com/nolan/64/user-group-man-woman.png" alt="Team" />
+      <p class="mt-1">Team</p>
+  </div>
+  <div class="flex flex-col items-center">
+      <img width="30" height="30" src="https://img.icons8.com/nolan/512/user-default.png" alt="Mine" />
+      <p class="mt-1">Mine</p>
+  </div>
+</nav>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      $(document).ready(function () {
+  let currentIndex = 0;
+  const items = $('[data-twe-carousel-item]');
+  const totalItems = items.length;
+  const intervalTime = 5000; // Time for automatic slide change
+
+  function showSlide(index) {
+    items.removeClass('active').addClass('hidden');
+    items.eq(index).addClass('active').removeClass('hidden');
+  }
+
+  function nextSlide() {
+    currentIndex = (currentIndex + 1) % totalItems;
+    showSlide(currentIndex);
+  }
+
+  // Automatically switch slides
+  let interval = setInterval(nextSlide, intervalTime);
+
+  // Swipe functionality
+  let startX = 0;
+  let endX = 0;
+
+  $('#carouselExampleSlidesOnly')
+    .on('touchstart', function (e) {
+      startX = e.originalEvent.touches[0].clientX;
+    })
+    .on('touchend', function (e) {
+      endX = e.originalEvent.changedTouches[0].clientX;
+
+      if (startX > endX + 30) {
+        // Swipe left
+        clearInterval(interval);
+        nextSlide();
+        interval = setInterval(nextSlide, intervalTime);
+      } else if (startX < endX - 30) {
+        // Swipe right
+        clearInterval(interval);
+        currentIndex = (currentIndex - 1 + totalItems) % totalItems;
+        showSlide(currentIndex);
+        interval = setInterval(nextSlide, intervalTime);
+      }
+    });
+});
+
+    </script>
+<script>
+   $(document).ready(function () {
+    const languages = [
+    { code: "en", name: "English", flag: "https://flagcdn.com/w40/us.png" },
+    { code: "hi", name: "Hindi", flag: "https://flagcdn.com/w40/in.png", disabled: true },
+    { code: "es", name: "Spanish ", flag: "https://flagcdn.com/w40/es.png", disabled: true },
+    { code: "fr", name: "French ", flag: "https://flagcdn.com/w40/fr.png", disabled: true },
+    { code: "zh", name: "Chinese", flag: "https://flagcdn.com/w40/cn.png", disabled: true },
+    { code: "ar", name: "Arabic ", flag: "https://flagcdn.com/w40/sa.png", disabled: true },
+    { code: "de", name: "German ", flag: "https://flagcdn.com/w40/de.png", disabled: true },
+    { code: "ru", name: "Russian ", flag: "https://flagcdn.com/w40/ru.png", disabled: true },
+    { code: "ja", name: "Japanese ", flag: "https://flagcdn.com/w40/jp.png", disabled: true },
+    { code: "pt", name: "Portuguese ", flag: "https://flagcdn.com/w40/pt.png", disabled: true },
+    { code: "it", name: "Italian ", flag: "https://flagcdn.com/w40/it.png", disabled: true },
+    { code: "ko", name: "Korean ", flag: "https://flagcdn.com/w40/kr.png", disabled: true },
+    { code: "tr", name: "Turkish ", flag: "https://flagcdn.com/w40/tr.png", disabled: true },
+    { code: "nl", name: "Dutch ", flag: "https://flagcdn.com/w40/nl.png", disabled: true },
+    { code: "pl", name: "Polish ", flag: "https://flagcdn.com/w40/pl.png", disabled: true },
+    { code: "sv", name: "Swedish ", flag: "https://flagcdn.com/w40/se.png", disabled: true },
+    { code: "no", name: "Norwegian ", flag: "https://flagcdn.com/w40/no.png", disabled: true },
+    { code: "da", name: "Danish ", flag: "https://flagcdn.com/w40/dk.png", disabled: true },
+    { code: "fi", name: "Finnish ", flag: "https://flagcdn.com/w40/fi.png", disabled: true },
+    { code: "th", name: "Thai ", flag: "https://flagcdn.com/w40/th.png", disabled: true },
+    { code: "id", name: "Indonesian", flag: "https://flagcdn.com/w40/id.png", disabled: true },
+    { code: "vi", name: "Vietnamese", flag: "https://flagcdn.com/w40/vn.png", disabled: true },
+    { code: "cs", name: "Czech ", flag: "https://flagcdn.com/w40/cz.png", disabled: true },
+    { code: "sk", name: "Slovak ", flag: "https://flagcdn.com/w40/sk.png", disabled: true },
+    { code: "he", name: "Hebrew", flag: "https://flagcdn.com/w40/il.png", disabled: true },
+    { code: "el", name: "Greek ", flag: "https://flagcdn.com/w40/gr.png", disabled: true },
+    { code: "ro", name: "Romanian ", flag: "https://flagcdn.com/w40/ro.png", disabled: true },
+    { code: "hu", name: "Hungarian" , flag: "https://flagcdn.com/w40/hu.png", disabled: true },
+    { code: "sr", name: "Serbian ", flag: "https://flagcdn.com/w40/rs.png", disabled: true },
+    { code: "bg", name: "Bulgarian ", flag: "https://flagcdn.com/w40/bg.png", disabled: true },
+    { code: "hr", name: "Croatian ", flag: "https://flagcdn.com/w40/hr.png", disabled: true },
+    { code: "sl", name: "Slovenian ", flag: "https://flagcdn.com/w40/si.png", disabled: true },
+    { code: "sq", name: "Albanian ", flag: "https://flagcdn.com/w40/al.png", disabled: true },
+    { code: "mk", name: "Macedonian ", flag: "https://flagcdn.com/w40/mk.png", disabled: true },
+    // Add more languages here as needed
+  ];
+
+
+  // Populate language list dynamically
+  languages.forEach(lang => {
+    const listItem = `
+      <li>
+        <button class="flex items-center justify-between px-4 py-2 w-full text-left ${
+          lang.disabled ? "bg-gray-700 cursor-not-allowed" : "bg-gray-700 hover:bg-blue-800"
+        } text-white rounded" ${lang.disabled ? "disabled" : `data-lang="${lang.code}"`}>
+          <span class="flex items-center">
+            <img src="${lang.flag}" alt="${lang.name}" class="w-5 h-5 mr-2" />
+            ${lang.name}
+          </span>
+          ${lang.disabled ? '<span class="text-sm italic">Soon</span>' : ""}
+        </button>
+      </li>`;
+    $("#language-list").append(listItem);
+  });
+
+  // Show the popup when the logo is clicked
+  $("#language-logo").click(function () {
+    $("#language-popup").removeClass("hidden");
+  });
+
+  // Close the popup when the close button is clicked
+  $("#popup-close").click(function () {
+    $("#language-popup").addClass("hidden");
+  });
+
+  // Function to change language and save it to localStorage
+  function changeLanguage(lang) {
+    $("#content [data-en]").each(function () {
+      const text = $(this).data(lang);
+      $(this).text(text);
+    });
+    localStorage.setItem("preferredLanguage", lang); // Save language to localStorage
+    
+  }
+
+  // Load preferred language from localStorage or default to English
+  const savedLanguage = localStorage.getItem("preferredLanguage") || "en";
+  changeLanguage(savedLanguage);
+
+  // Click event for dynamic language buttons
+  $("#language-list").on("click", "button:not([disabled])", function () {
+    const lang = $(this).data("lang");
+    changeLanguage(lang);
+    $("#language-popup").addClass("hidden");
+  });
+});
+
+</script>
+</script>
+<script>
+  $(document).ready(function() {
+    function fetchCoinData(symbol, priceElem, changeElem) {
+      $.ajax({
+        url: `https://api.binance.com/api/v3/ticker/24hr?symbol=${symbol}`,
+        type: "GET",
+        success: function(data) {
+          const price = parseFloat(data.lastPrice).toFixed(2);
+          const change = parseFloat(data.priceChangePercent).toFixed(2);
+
+          // Set price and change percentage
+          $(priceElem).text(price);
+          $(changeElem).text(`${change}%`);
+
+          // Apply color based on positive or negative change
+          if (change >= 0) {
+            $(priceElem).removeClass("text-red-600").addClass("text-green-600");
+            $(changeElem).removeClass("text-red-600").addClass("text-green-600");
+          } else {
+            $(priceElem).removeClass("text-green-600").addClass("text-red-600");
+            $(changeElem).removeClass("text-green-600").addClass("text-red-600");
+          }
+        },
+        error: function() {
+          $(priceElem).text("...");
+          $(changeElem).text("...");
+        }
+      });
+    }
+
+    function updateData() {
+      fetchCoinData("BTCUSDT", "#btc-price", "#btc-change");
+      fetchCoinData("ETHUSDT", "#eth-price", "#eth-change");
+      fetchCoinData("BCHUSDT", "#bch-price", "#bch-change");
+    }
+
+    // Fetch data initially and then update every 5 seconds
+    updateData();
+    setInterval(updateData, 3000);
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+    const coins = [
+
+{ symbol: 'BTCUSDT', name: 'BTC/USDT', price: 96080.57, change: -0.31, img: 'https://widget.coinlib.io/static/img/coins/small/btc.png?25799', page: "{{ url_for('btc') }}" },
+{symbol: 'ETHUSDT', name: 'ETH/USDT', price: 3654.53, change: -1.06, img: 'https://widget.coinlib.io/static/img/coins/small/eth.png?25799', page: "{{ url_for('eth') }}"},
+{symbol: 'BNBUSDT', name: 'BNB/USDT', price: 653.27, change: -1.38, img: 'https://widget.coinlib.io/static/img/coins/small/bnb.png?25799', page: "{{ url_for('bnb') }}"},
+{symbol: 'EOSUSDT', name: 'EOS/USDT', price: 1.45, change: 0.58, img: 'https://widget.coinlib.io/static/img/coins/small/eos.png?25799', page: "{{ url_for('eos') }}"},
+{symbol: 'DOGEUSDT', name: 'DOGE/USDT', price: 0.42, change: 1.25, img: 'https://widget.coinlib.io/static/img/coins/small/doge.png?25799', page: "{{ url_for('doge') }}"},
+{symbol: 'BCHUSDT', name: 'BCH/USDT', price: 548.70, change: -0.75, img: 'https://widget.coinlib.io/static/img/coins/small/bch.png?25799', page: "{{ url_for('bch') }}"},
+{symbol: 'LTCUSDT', name: 'LTC/USDT', price: 132.67, change: -2.12, img: 'https://widget.coinlib.io/static/img/coins/small/ltc.png?25799', page: "{{ url_for('ltc') }}"},
+{symbol: 'IOTAUSDT', name: 'IOTA/USDT', price: 0.51, change: 0.85, img: 'https://widget.coinlib.io/static/img/coins/small/iot.png?25799', page: "{{ url_for('iota') }}"},
+{symbol: 'FILUSDT', name: 'FIL/USDT', price: 7.55, change: 1.15, img: 'https://widget.coinlib.io/static/img/coins/small/fil.png?25799', page: "{{ url_for('fil') }}"},
+{symbol: 'UNIUSDT', name: 'UNI/USDT', price: 7.512, change: -0.94, img: 'https://cryptologos.cc/logos/thumbs/uniswap.png?v=034', page: "{{ url_for('uni') }}"},
+{symbol: 'ZECUSDT', name: 'ZEC/USDT', price: 37.66, change: 0.95, img: 'https://widget.coinlib.io/static/img/coins/small/zec.png?25799', page: "{{ url_for('zec') }}"},
+{symbol: 'ETCUSDT', name: 'ETC/USDT', price: 18.45, change: 0.95, img: 'https://widget.coinlib.io/static/img/coins/small/etc.png?25799', page: "{{ url_for('etc') }}"},
+{symbol: 'TRXUSDT', name: 'TRX/USDT', price: 0.164, change: 0.95, img: 'https://widget.coinlib.io/static/img/coins/small/trx.png?25799', page: "{{ url_for('trx') }}"},
+{symbol: 'ADAUSDT', name: 'ADA/USDT', price: 0.34, change: -2.21, img: 'https://widget.coinlib.io/static/img/coins/small/ada.png?25799', page: "{{ url_for('ada') }}"},
+{symbol: 'DOTUSDT', name: 'DOT/USDT', price: 4.028, change: 0.95, img: 'https://widget.coinlib.io/static/img/coins/small/dot.png?25799', page: "{{ url_for('dot') }}"},
+{symbol: 'LUNAUSDT', name: 'LUNA/USDT', price: 0.33, change: 0.95, img: 'https://widget.coinlib.io/static/img/coins/small/luna.png?25799', page: "{{ url_for('luna') }}"},
+{symbol: 'NEOUSDT', name: 'NEO/USDT', price: 9.429, change: 0.95, img: 'https://widget.coinlib.io/static/img/coins/small/neo.png?25799', page: "{{ url_for('neo') }}"}
+
+];
+
+
+    const fetchAndUpdatePrices = () => {
+        coins.forEach((coin, index) => {
+            $.getJSON(`https://api.binance.com/api/v3/ticker/24hr?symbol=${coin.symbol}`, function (data) {
+                coin.price = parseFloat(data.lastPrice);
+                coin.change = parseFloat(data.priceChangePercent);
+
+                $(`#price-${index}`).text(`${coin.price.toFixed(2)}`);
+                const changeElement = $(`#change-${index}`);
+                changeElement.text(`${coin.change.toFixed(2)}%`);
+                changeElement.css('color', coin.change >= 0 ? 'green' : 'red');
+            }).fail(() => {
+                $(`#price-${index}`).text(`${coin.price}`);
+                $(`#change-${index}`).text(`${coin.change}%`).css('color', coin.change >= 0 ? 'green' : 'red');
+            });
+        });
+    };
+
+    $(document).ready(function () {
+        coins.forEach((coin, index) => {
+            const card = `
+                <tr class="bg-gray-700 bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-30  cursor-pointer" onclick="location.href='${coin.page}'">
+                    <td class="hover:bg-gray-900 pl-4 py-3 mt-0.5 border border-gray-800 flex items-center gap-3">
+                        <img src="${coin.img}" alt="${coin.name}" class="h-5 w-5">
+                        <span class="text-sm font-semibold ">${coin.name}</span>
+                    </td>
+                    <td class=" crypto-price px-4 py-3 border border-gray-800 text-center font-semibold" id="price-${index}" >
+                      ${coin.price}
+                    </td>
+                    <td class="px-4 py-3 font-semibold border border-gray-800 text-center " id="change-${index}" style="color: ${coin.change >= 0 ? 'green' : 'red'};">
+                        ${coin.change.toFixed(2)}%
+                    </td>
+                     
+                </tr>
+            `;
+            $('#crypto-table-body').append(card);
+        });
+
+        // Fetch prices initially and update every second
+        fetchAndUpdatePrices();
+        setInterval(fetchAndUpdatePrices, 3000);
+    });
+    </script>
+</body>
+</html>
